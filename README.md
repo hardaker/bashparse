@@ -4,7 +4,7 @@
 
 ## Dependencies
 
-    This package only depends on bashlex
+This package only depends on `bashlex`
 
 ## Usage
     
@@ -27,7 +27,7 @@ return these commands as strings we can do the following:
     bash_text = 'n="/tmp /var /etc"\n for a in $n \n do \n cd $a \n touch somefile.txt \n done'
     nodes = bashparse.parse(bash_text)  # Parse the text
     replaced_nodes = bashparse.find_and_replace_variables(nodes)  # Make the variable substitutions
-    commands_executed = bashparse.return_nodes_of_type(node, 'command')  
+    commands_executed = bashparse.return_nodes_of_type(nodes, 'command')  
     # Get all the commands executed from newly replaced nodes
     for command in commands_executed:  # Print the command nodes as string
         print(bashparse.convert_tree_to_string(command))
@@ -38,17 +38,12 @@ This will return the following output:
 ``` sh
     n=/tmp /var /etc
     touch somefile.txt
-    cd /etc
+    cd /tmp
     touch somefile.txt
     cd /var
     touch somefile.txt
-    cd /tmp
-    touch somefile.txt
     cd /etc
     touch somefile.txt
-    cd /var
-    touch somefile.txt
-    cd /tmp
 ```
     
 Which is easily seen to be the code actually executed by the script, in the order that its displayed.
