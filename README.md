@@ -22,6 +22,7 @@ Lets assume that you'd like to get all the commands executed from the following 
 If we want to "unroll" this loop, replace all the variables, and
 return these commands as strings we can do the following:
     
+``` sh
     import bashparse
     bash_text = 'n="/tmp /var /etc"\n for a in $n \n do \n cd $a \n touch somefile.txt \n done'
     nodes = bashparse.parse(bash_text)  # Parse the text
@@ -30,9 +31,11 @@ return these commands as strings we can do the following:
     # Get all the commands executed from newly replaced nodes
     for command in commands_executed:  # Print the command nodes as string
         print(bashparse.convert_tree_to_string(command))
+```
     
 This will return the following output:
     
+``` sh
     n=/tmp /var /etc
     touch somefile.txt
     cd /etc
@@ -46,11 +49,13 @@ This will return the following output:
     cd /var
     touch somefile.txt
     cd /tmp
+```
     
 Which is easily seen to be the code actually executed by the script, in the order that its displayed.
     
 One could easily find all the directories the script tries to enter using the following code:
         
+``` sh
     import bashparse
     bash_text = 'n="/tmp /var /etc"\n for a in $n \n do \n cd $a \n touch somefile.txt \n done'
     nodes = bashparse.parse(bash_text)  # Parse the text
@@ -59,12 +64,15 @@ One could easily find all the directories the script tries to enter using the fo
     cds_executed = bashparse.find_specific_command(commands_executed, 'cd', return_as_strings=True)
     for cd_node in cds_executed:
         print(cd_node)
+```
     
 Which would return the output:
     
+``` sh
     cd /var
     cd /tmp
     cd /etc
+```
       
 ## Function Descriptions
 
