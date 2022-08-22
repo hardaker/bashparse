@@ -55,7 +55,7 @@ One could easily find all the directories the script tries to enter using the fo
     bash_text = 'n="/tmp /var /etc"\n for a in $n \n do \n cd $a \n touch somefile.txt \n done'
     nodes = bashparse.parse(bash_text)  # Parse the text
     replaced_nodes = bashparse.find_and_replace_variables(nodes)  # Make the variable substitutions
-    commands_executed = bashparse.return_nodes_of_type(node, 'command') 
+    commands_executed = bashparse.return_nodes_of_type(nodes, 'command') 
     cds_executed = bashparse.find_specific_command(commands_executed, 'cd', return_as_strings=True)
     for cd_node in cds_executed:
         print(cd_node)
