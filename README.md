@@ -22,7 +22,7 @@ Lets assume that you'd like to get all the commands executed from the following 
 If we want to "unroll" this loop, replace all the variables, and
 return these commands as strings we can do the following:
     
-``` sh
+``` python
     import bashparse
     bash_text = 'n="/tmp /var /etc"\n for a in $n \n do \n cd $a \n touch somefile.txt \n done'
     nodes = bashparse.parse(bash_text)  # Parse the text
@@ -55,7 +55,7 @@ Which is easily seen to be the code actually executed by the script, in the orde
     
 One could easily find all the directories the script tries to enter using the following code:
         
-``` sh
+``` python
     import bashparse
     bash_text = 'n="/tmp /var /etc"\n for a in $n \n do \n cd $a \n touch somefile.txt \n done'
     nodes = bashparse.parse(bash_text)  # Parse the text
