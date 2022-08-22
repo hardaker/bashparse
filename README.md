@@ -1,6 +1,6 @@
 # bashparse: A python library for bash file interpretation
 
-bashparse is a python library containing a number of helpful tools to contextualize bash scripts.
+`bashparse` is a python library containing a number of helpful tools to contextualize bash scripts.
 
 ## Dependencies
 
@@ -9,17 +9,18 @@ bashparse is a python library containing a number of helpful tools to contextual
 ## Usage
     
 Lets assume that you'd like to get all the commands executed from the following bash script:
-        
+    
+``` sh
     n="/tmp /var /etc"
     for a in $n
     do
         cd $a
         touch somefile.txt
     done
-    
-We want to unroll this loop, replace all the variables, and return these commands as strings. 
-    
-To do this we can do the following:
+```
+
+If we want to "unroll" this loop, replace all the variables, and
+return these commands as strings we can do the following:
     
     import bashparse
     bash_text = 'n="/tmp /var /etc"\n for a in $n \n do \n cd $a \n touch somefile.txt \n done'
