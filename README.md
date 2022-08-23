@@ -4,7 +4,7 @@ bashparse is a python library containing a number of helpful tools to analyze ba
 
 ## Dependencies
 
-    This package only depends on bashlex
+This package only depends on [bashlex](https://pypi.org/project/bashlex/).
 
 ## Usage
 
