@@ -10,11 +10,11 @@ This package only depends on [bashlex](https://pypi.org/project/bashlex/).
 
 ast.py
 
-The first and most important object to understand is the NodeVisitor. This object is used to manipulate bashlex.ast.node objects. Bashlex.ast.nodes are a single construct from the bash programming language. If a single command is issued, then the node will be just that command. If a for loop is used, then a node will be the entire for loop and any command executed in the body of that loop.
+The first and most important object to understand is the *NodeVisitor*. This object is used to manipulate *bashlex.ast.node* objects. *Bashlex.ast.nodes* are a single construct from the bash programming language. If a single shell command is issued, then the node will be just that command. If a *for* loop is used, then a node will be the entire *for* loop and any command(s) executed in the body of that loop.
 
-A NodeVisitor is declared using the syntax: var_name = NodeVisitor(root) where root is the bashlex.ast.node you would like to manipulate. 
+A *NodeVisitor* is declared using the syntax: `var_name = NodeVisitor(root)` where root is the *bashlex.ast.node* you would like to manipulate. 
 
-When converted to a string, the NodeVisitor prints a formatted version of the root specified during the declaration.
+When converted to a string, the *NodeVisitor* prints a formatted version of the root specified during its declaration.
 
 The most imporant property of the node visitor is the apply() function. apply() takes the function you would like to execute on every node in NodeVisitor.root as its first argument and any further arguments passed in will be passed into the function you defined using *args and **kwargs.
 This function can do anything but the easiest implementation is usually a FSM. It allows you to easily extract and manipulate data within the ast, while abstracting far enough away from the ast that you don't need to worry about writing graph algorithms. apply() comes with 3 return values which allow users to manipate the traversal of the tree. If your defined function returns bashparse.ast.CONT (or nothing), apply() will continue iterating over the tree. If bashparse.ast.DONT_DESCEND is returned, apply() will continue execute but will skip all children of the current node. If bashparse.ast.HALT is returned, apply() will return immediately without visiting any other nodes. 
