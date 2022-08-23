@@ -69,17 +69,20 @@ This file provides 2 key pieces of functionality. It provides the ability to str
 
 Lets assume that you'd like to get all the commands executed from the following bash script:
         
+``` sh
     n="/tmp /var /etc"
     for a in $n
     do
         cd $a
         touch somefile.txt
     done
-    
+```
+
 We want to unroll this loop, replace all the variables, and return these commands as strings. 
     
 To do this we can do the following:
     
+``` python
     import bashparse
     bash_text = 'n="/tmp /var /etc"\n for a in $n \n do \n cd $a \n touch somefile.txt \n done'
     nodes = bashparse.parse(bash_text)  # Parse the text
@@ -87,9 +90,11 @@ To do this we can do the following:
 
     for command in commands_executed:  # Print the command nodes as string
         print(bashparse.convert_tree_to_string(command))
+```
     
 This will return the following output:
     
+``` sh
     n=/tmp /var /etc
     touch somefile.txt
     cd /etc
@@ -103,11 +108,13 @@ This will return the following output:
     cd /var
     touch somefile.txt
     cd /tmp
+```
     
 Which is easily seen to be the code actually executed by the script, in the order that its displayed.
     
 One could easily find all the directories the script tries to enter using the following code:
         
+``` python
     import bashparse
     from bashparse import NodeVisitor
     def apply_fn(node, vstr):
@@ -123,13 +130,13 @@ One could easily find all the directories the script tries to enter using the fo
 
     for directory in directories_entered:
         print(directory)
+```
     
 Which would return the output:
     
     /var
     /tmp
     /etc
-      
 
 ## Practice Implementations:
     
